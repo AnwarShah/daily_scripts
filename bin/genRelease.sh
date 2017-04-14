@@ -6,4 +6,4 @@ Label: Local Ubuntu Repository
 Architecture: amd64 i386
 EOF
 apt-ftparchive release . >> Release
-gpg -abs -o Release.gpg Release
+gpg --yes -abs -o Release.gpg Release
