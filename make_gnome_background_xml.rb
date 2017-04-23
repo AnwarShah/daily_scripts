@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-new_xml = File.open('new-backgrounds.xml', 'w')
+require "optparse"
 
 def write_header(writer)
   writer.write "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -32,15 +32,45 @@ def xml_block(image_with_path)
 EOS
 end
 
-write_header(new_xml)
-write_open_tag(new_xml)
+def write_xml_file(xml_writer, file_list)
+  write_header(xml_writer)
+  write_open_tag(xml_writer)
 
-File.open('backgrounds.txt', "r") do |f|
-  f.each_line do |line|
-    new_xml.write xml_block(line.strip)
+  file_list.each do |line|
+    xml_writer.write xml_block(line.strip)
   end
+
+  write_end_tag(xml_writer)
+  xml_writer.close
 end
 
-write_end_tag(new_xml)
+def parse_options
+  options = {}
 
-new_xml.close
+  parser = OptionParser.new do |opt|
+    opt.on('-d', '--directory DIRECTORY', 'Directory to look for images') { |o| options[:directory] = o }
+    opt.on('-e', '--extension EXTENSION', 'Image extension') { |o| options[:extension] = o }
+  end
+
+  parser.parse!
+
+  if options[:directory].nil? || options[:extension].nil?
+    parser.warn "Bad arguments! Please use correct syntax"
+    puts parser.help
+    exit(1)
+  end
+
+  options
+end
+
+if $0 == __FILE__
+  options = parse_options
+
+  directory = options[:directory]
+  ext = options[:extension]
+
+  xml_writer = File.open('new-backgrounds.xml', 'w')
+  file_names = Dir.glob(directory + '/' + '*.' + ext)
+
+  write_xml_file(xml_writer, file_names)
+end
