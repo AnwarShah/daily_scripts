@@ -32,12 +32,20 @@ def xml_block(image_with_path)
 EOS
 end
 
+def show_skip_message(filename)
+  puts "Illegal character in file name: skipped '#{File.basename filename}'"
+end
+
 def write_xml_file(xml_writer, file_list)
   write_header(xml_writer)
   write_open_tag(xml_writer)
 
-  file_list.each do |line|
-    xml_writer.write xml_block(line.strip)
+  file_list.each do |filename|
+    if filename.include?("&")
+      show_skip_message(filename)
+      next
+    end
+    xml_writer.write xml_block(filename.strip)
   end
 
   write_end_tag(xml_writer)
@@ -70,7 +78,7 @@ if $0 == __FILE__
   ext = options[:extension]
 
   xml_writer = File.open('new-backgrounds.xml', 'w')
-  file_names = Dir.glob(directory + '/' + '*.' + ext)
+  file_names = Dir.glob(directory + '*.' + ext)
 
   write_xml_file(xml_writer, file_names)
 end
