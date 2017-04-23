@@ -14,8 +14,8 @@ def write_end_tag(writer)
   writer.write "</wallpapers>\n"
 end
 
-def titleize(shitty_string)
-  shitty_string.gsub(/_|-/,' ').split.map { |word| word[0].upcase + word[1..-1] }.join(' ')
+def titleize(filename)
+  filename.gsub(/_|-/,' ').split.map { |word| word[0].upcase + word[1..-1] }.join(' ')
 end
 
 def xml_block(image_with_path)
