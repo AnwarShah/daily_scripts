@@ -5,6 +5,6 @@ echo "copying newly updated debs to ... $backup_dir"
 cp -u -v $archive_dir/*.deb $backup_dir
 
 # Now update the package index file
-cd $backup_deb/
+cd $backup_dir/
 genPackages.sh && genRelease.sh
 
