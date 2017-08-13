@@ -78,7 +78,7 @@ if $0 == __FILE__
   ext = options[:extension]
 
   xml_writer = File.open('new-backgrounds.xml', 'w')
-  file_names = Dir.glob(directory + '*.' + ext)
+  file_names = Dir.glob(directory + '/*.' + ext)
 
   write_xml_file(xml_writer, file_names)
 end
