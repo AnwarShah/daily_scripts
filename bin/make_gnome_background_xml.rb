@@ -45,7 +45,7 @@ def write_xml_file(xml_writer, file_list)
       show_skip_message(filename)
       next
     end
-    xml_writer.write xml_block(filename.strip)
+    xml_writer.write xml_block((File.absolute_path filename).strip)
   end
 
   write_end_tag(xml_writer)
