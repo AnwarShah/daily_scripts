@@ -2,7 +2,7 @@ release_name=$(lsb_release -cs)
 backup_dir="/mnt/Data/Software/Linux/Debian_Packages/"$release_name"_new/"
 archive_dir="/var/cache/apt/archives"
 
-if [ ! -f $backup_dir ];then
+if [ ! -d $backup_dir ];then
     echo "Creating ..." $backup_dir
     mkdir $backup_dir
 fi
