@@ -1,3 +1,4 @@
+before_dir=$(pwd)
 release_name=$(lsb_release -cs)
 backup_dir="/mnt/Data/Software/Linux/Debian_Packages/"$release_name"_new/"
 archive_dir="/var/cache/apt/archives"
@@ -12,6 +13,9 @@ cp -u -v $archive_dir/*.deb $backup_dir
 
 # Now update the package index file
 if cd $backup_dir/; then
+  dpkg-name *.deb # try to rename the packages
   genPackages.sh && genRelease.sh
 fi
 
+# Go back to previous working dir
+cd $before_dir
