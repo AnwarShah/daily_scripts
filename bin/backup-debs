@@ -1,3 +1,5 @@
+#!/bin/bash
+
 before_dir=$(pwd)
 release_name=$(lsb_release -cs)
 backup_dir="/mnt/Data/Software/Linux/Debian_Packages/"$release_name"_new/"
