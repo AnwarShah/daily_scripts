@@ -2,7 +2,7 @@
 cd /mnt/home
 
 PKG_DIR="$HOME/.atom/packages"
-BACKUP_FILE_BASENAME="atom-packages-$(date +%d%m%Y)" #Day-Month-Year
+BACKUP_FILE_BASENAME="atom-packages-$(date +%Y%m%d)" #YYYYMMDD
 
 if [ ! -d $PKG_DIR ]; then
   echo "Cannot find the directory $PKG_DIR. Exiting..."

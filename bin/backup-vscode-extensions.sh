@@ -2,7 +2,7 @@
 cd /mnt/home
 
 PKG_DIR="$HOME/.vscode/extensions"
-BACKUP_FILE_BASENAME="vscode-extensions-$(date +%d%m%Y)" #Day-Month-Year
+BACKUP_FILE_BASENAME="vscode-extensions-$(date +%Y%m%d)" #YYYYMMDD
 
 if [ ! -d $PKG_DIR ]; then
   echo "Cannot find the directory $PKG_DIR. Exiting..."
