@@ -3,7 +3,7 @@
 cd /mnt/home
 
 VIMDIR="/mnt/xenial/home/anwar/.vim"
-BACKUP_FILENAME="vim-$(date +%d%m%Y%k%M%S)" #Day-Month-Year-Hour-Minute-Second
+BACKUP_FILENAME="vim-$(date +%Y%m%d%k%M%S)" #Year-Month-Day-Hour-Minute-Second
 
 if [ ! -d $VIMDIR ]; then
   echo "Cannot find the directory $VIMDIR. Exiting..."
