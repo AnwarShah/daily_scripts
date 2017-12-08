@@ -10,12 +10,21 @@ if [ ! -d $backup_dir ];then
     mkdir $backup_dir
 fi
 
-echo "copying newly updated debs to ... $backup_dir"
-cp -u -v $archive_dir/*.deb $backup_dir
+echo "copying newly updated debs to temp dir for renaming..."
+# Create a temp dir for renaming
+temp_dir=/tmp/new_debs
+
+if [ ! -d $temp_dir ]; then mkdir $temp_dir; fi
+cp -u $archive_dir/*.deb $temp_dir 
+dpkg-name -o $temp_dir/*.deb 2>/dev/null # try to rename the packages
+
+# Now copy them to $backup_dir
+echo "Copying renamed debs to backup dir..."
+cp -u $temp_dir/*.deb $backup_dir
 
 # Now update the package index file
+echo "Generating Package index and Release file"
 if cd $backup_dir/; then
-  dpkg-name *.deb # try to rename the packages
   genPackages.sh && genRelease.sh
 fi
 
