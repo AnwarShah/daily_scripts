@@ -3,15 +3,15 @@
 require "optparse"
 
 def write_header(writer)
-  writer.write "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+  writer.puts %s(<?xml version="1.0" encoding="UTF-8"?>)
 end
 
 def write_open_tag(writer)
-  writer.write "<wallpapers>\n"
+  writer.puts %s(<wallpapers>)
 end
 
 def write_end_tag(writer)
-  writer.write "</wallpapers>\n"
+  writer.puts %s(</wallpapers>)
 end
 
 def titleize(filename)
@@ -22,12 +22,12 @@ def xml_block(image_with_path)
   image_name = File.basename image_with_path, ".jpg"
 <<-EOS
     <wallpaper deleted="false">
-          <name>#{titleize(image_name)}</name>
-          <filename>#{image_with_path}</filename>
-          <options>zoom</options>
-          <pcolor>#000000</pcolor>
-          <scolor>#000000</scolor>
-          <shade_type>solid</shade_type>
+        <name>#{titleize(image_name)}</name>
+        <filename>#{image_with_path}</filename>
+        <options>zoom</options>
+        <pcolor>#000000</pcolor>
+        <scolor>#000000</scolor>
+        <shade_type>solid</shade_type>
     </wallpaper>
 EOS
 end
