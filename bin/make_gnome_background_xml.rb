@@ -57,12 +57,12 @@ def parse_options
 
   parser = OptionParser.new do |opt|
     opt.on('-d', '--directory DIRECTORY', 'Directory to look for images') { |o| options[:directory] = o }
-    opt.on('-e', '--extension EXTENSION', 'Image extension') { |o| options[:extension] = o }
+    opt.on('-e', '--extension EXTENSION', 'file extensions (Default: jpg, png)') { |o| options[:extension] = o }
   end
 
   parser.parse!
 
-  if options[:directory].nil? || options[:extension].nil?
+  if options[:directory].nil?
     parser.warn "Bad arguments! Please use correct syntax"
     puts parser.help
     exit(1)
@@ -75,10 +75,10 @@ if $0 == __FILE__
   options = parse_options
 
   directory = options[:directory]
-  ext = options[:extension]
+  ext = (options[:extension] || "jpg,png").delete(' ')
 
   xml_writer = File.open('new-backgrounds.xml', 'w')
-  file_names = Dir.glob(directory + '/*.' + ext)
+  file_names = Dir.glob(directory + "/*.{#{ext}}")
 
   write_xml_file(xml_writer, file_names)
 end
