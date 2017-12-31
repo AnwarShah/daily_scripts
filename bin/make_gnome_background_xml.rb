@@ -76,8 +76,9 @@ if $0 == __FILE__
 
   directory = options[:directory]
   ext = (options[:extension] || "jpg,png").delete(' ')
+  output_filename = File.basename(directory) + '.xml' || 'new-backgrounds.xml'
 
-  xml_writer = File.open('new-backgrounds.xml', 'w')
+  xml_writer = File.open(output_filename, 'w')
   file_names = Dir.glob(directory + "/*.{#{ext}}")
 
   write_xml_file(xml_writer, file_names)
