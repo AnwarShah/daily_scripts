@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gems_backup_dir="/mnt/Data/Software/RubyGems/"
+gems_backup_dir="/mnt/Software/RubyGems/"
 
 if [ -d $gems_backup_dir ]; then
   find $HOME/.rvm -follow -iname '*.gem' -type f -exec cp -u -v {} $gems_backup_dir/gems/ \;

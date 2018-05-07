@@ -9,7 +9,7 @@ if [ ! -d $YARN_DIR ]; then
   return -1
 else
   echo "Starting backup from $(pwd)/$YARN_DIR"
-  tar -caf /mnt/home/$BACKUP_FILE_BASENAME.tar.gz --one-file-system $YARN_DIR
+  tar -caf $HOME/Me/$BACKUP_FILE_BASENAME.tar.gz --one-file-system $YARN_DIR
   echo "Backup finished successfully."
 fi
 

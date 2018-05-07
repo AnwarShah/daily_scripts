@@ -1,5 +1,4 @@
-# Go to /mnt/home first
-cd /mnt/home
+cd ~/Me/Backups
 
 PKG_DIR="$HOME/.atom/packages"
 BACKUP_FILE_BASENAME="atom-packages-$(date +%Y%m%d)" #YYYYMMDD
