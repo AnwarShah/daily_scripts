@@ -2,12 +2,16 @@
 
 before_dir=$(pwd)
 release_name=$(lsb_release -cs)
-backup_dir="/mnt/Software/Linux/Debian_Packages/"$release_name"_new/"
+backup_dir="/media/anwar/Software/Linux/Deb_Binaries/"$release_name"_new/"
 archive_dir="/var/cache/apt/archives"
 
 if [ ! -d $backup_dir ];then
     echo "Creating ..." $backup_dir
     mkdir $backup_dir
+    if [ $? -ne 0 ]; then
+      echo "FATAL Error while creating directory! Exiting ..."
+      exit 1
+    fi
 fi
 
 echo "copying newly updated debs to temp dir for renaming..."
