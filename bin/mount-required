@@ -1,0 +1,8 @@
+#!/bin/bash
+
+udisksctl mount -b /dev/disk/by-label/Software
+udisksctl mount -b /dev/disk/by-label/Media
+udisksctl mount -b /dev/disk/by-label/Data
+udisksctl mount -b /dev/disk/by-label/Deepin
+
+bin/mount-deb-sfs.sh

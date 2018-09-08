@@ -1,0 +1,12 @@
+sqfsdir=/media/anwar/Software/Linux/Deb_Binaries
+
+for img in {xenial,xenial2,zesty,artful}
+do
+  udevil unmount $sqfsdir/$img.squashfs
+done
+
+udisksctl unmount -b /dev/disk/by-label/Software
+udisksctl unmount -b /dev/disk/by-label/Media
+udisksctl unmount -b /dev/disk/by-label/Data
+udisksctl unmount -b /dev/disk/by-label/Deepin
+
