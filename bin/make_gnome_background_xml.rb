@@ -59,6 +59,7 @@ def parse_options
     opt.on('-d', '--directory DIRECTORY', 'Directory to look for images') { |o| options[:directory] = o }
     opt.on('-e', '--extension EXTENSION', 'file extensions (Default: jpg, png)') { |o| options[:extension] = o }
     opt.on('-r', '--recursive', 'Recursively search for files') { |o| options[:recursive] = o }
+    opt.on('-f', '--filename FILENAME', 'Use FILENAME instead of default backgrounds.xml') { |o| options[:filename] = o }
   end
 
   parser.parse!
@@ -77,7 +78,7 @@ if $0 == __FILE__
 
   directory = options[:directory]
   ext = (options[:extension] || "jpg,png").delete(' ')
-  output_filename = File.basename(directory) + '.xml' || 'new-backgrounds.xml'
+  output_filename = options[:filename].nil? ? 'backgrounds.xml' : options[:filename]
 
   xml_writer = File.open(output_filename, 'w')
 
