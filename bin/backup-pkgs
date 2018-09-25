@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cp -ruvn /var/cache/pacman/pkg/*.pkg.tar.xz /run/media/anwar/Software/Linux/Manjaro_Packages/
