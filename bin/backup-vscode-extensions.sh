@@ -1,5 +1,4 @@
-# Go to /mnt/home first
-cd ~/Me/Backups
+cd ~/Backups
 
 PKG_DIR="$HOME/.vscode/extensions"
 BACKUP_FILE_BASENAME="vscode-extensions-$(date +%Y%m%d)" #YYYYMMDD
