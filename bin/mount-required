@@ -5,4 +5,11 @@ udisksctl mount -b /dev/disk/by-label/Media
 udisksctl mount -b /dev/disk/by-label/Data
 udisksctl mount -b /dev/disk/by-label/Deepin
 
-bin/mount-deb-sfs.sh
+# also mount ubuntu Bionic if the os is not already mounted it on / 
+if [ "$(lsb_release -sc)" != "ubuntu" ];
+then
+  udisksctl mount -b /dev/disk/by-label/Bionic
+fi
+
+~/daily_scripts/bin/mount-deb-sfs.sh
+
