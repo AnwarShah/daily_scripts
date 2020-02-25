@@ -11,11 +11,11 @@ overlay() {
 		echo "Usage: overlay [fonts|themes|icons]"
 		return 1
 	else
-		echo "Requested overlay resource type is: $type"
+		echo "Requested overlay resource type is: ${type}"
 	fi
 
-	workdir=/var/tmp/$typeworkdir
-	resource_dir=/usr/share/$type
+	workdir="/var/tmp/${type}workdir"
+	resource_dir="/usr/share/${type}"
 	
 	# Try mount them first. Even if they are already mounted, no problem.
 	for i in "${partition_names[@]}"; do udisksctl mount -b /dev/disk/by-label/$i 2>/dev/null; done
