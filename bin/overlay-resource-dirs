@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Modify only this to the correct label of other linux partitions
+partition_names=(mint elementary NXOS Manjaro)
+
+overlay() {
+	# type must be fonts, icons or themes
+	type=$1
+	if [ "$type" != "fonts" ] && [ "$type" != "themes" ] && [ "$type" != "icons" ]; then
+		echo "Error! Please specify correct type!"
+		echo "Usage: overlay [fonts|themes|icons]"
+		return 1
+	else
+		echo "Requested overlay resource type is: $type"
+	fi
+
+	workdir=/var/tmp/$typeworkdir
+	resource_dir=/usr/share/$type
+	
+	# Try mount them first. Even if they are already mounted, no problem.
+	for i in "${partition_names[@]}"; do udisksctl mount -b /dev/disk/by-label/$i 2>/dev/null; done
+
+	# Determine the mounted paths from mount info instead of relying on guessing and 
+	# add them up to an array
+	unset mounted_paths
+	for i in ${partition_names[@]}; do mounted_paths+=($(lsblk | grep $i | awk '{print $7}')); done
+
+	## prepare lowerdir string with mounted_path info
+	lowerdir=""
+	for path in "${mounted_paths[@]}"; do lowerdir="$path$resource_dir:$lowerdir";  done
+	# remove the last : using parameter expansion https://unix.stackexchange.com/a/310243/19288
+	lowerdir=${lowerdir%?}
+	echo $lowerdir
+
+	# If the workdir doesn't exist, create it
+	if [ ! -d $workdir ]; then mkdir $workdir; fi 
+	
+	# Finally mount the path as overlay
+	sudo mount -t overlay overlay -o lowerdir=$lowerdir,upperdir=$resource_dir,workdir=$workdir $resource_dir	
+}
